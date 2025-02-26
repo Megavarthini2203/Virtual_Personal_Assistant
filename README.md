@@ -83,9 +83,9 @@ bash
 pip install transformers torch google-generativeai
 ```
 
-6. **Download model from my kaggle account:**
+6. **Download model using the following link **
 
-[KAGGLE LINK]
+[MODEL LINK]()
 
 Place the `model` and `tokenizer` folder inside the `brain`
 
