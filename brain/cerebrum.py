@@ -83,7 +83,7 @@ def parse_task_string(task_string: str):
     return task_dict
 
 def extract_using_gemini(formatted_time, catagories_string, message, feedback=""):
-    API_KEY = 'AIzaSyDWki8PZMr6rotpuelz6xdXhw0h63YBYeQ' # Need to add this!
+    API_KEY = '' # Need to add this!
     genai.configure(api_key=API_KEY)
 
     feedback = "\nFeedback:\n " + feedback
@@ -187,76 +187,6 @@ def mark_relavance_and_process():
     return UPDATION_STATUS
 
 # mark_relavance_and_process()
-def process_updates():
-    try:
-        # Connect to MongoDB databases
-        client = MongoClient('mongodb://localhost:27017/')
-        db = client['whatsapp']
-        collection = db['messages']
 
-        db2 = client['TODOBOT']
-        todo_list_collection = db2['TODOLIST']
-        update_collection = collection['updates']
-        message_collection = collection['messages']
-        
-        # Step 1: Fetch updates where isPending is false
-        updates = update_collection.find({"isPending": False})
-
-        for update in updates:
-            # Check if update_type is 'feedback'
-            if update.get("update_type") != "feedback":
-                continue
-
-            message_id = update.get("message_id")
-
-            # Step 2: Fetch feedback and body from message_collection
-            message = message_collection.find_one({"messageId": message_id})
-
-            if not message:
-                print(f"No message found for message_id: {message_id}")
-                continue
-
-            feedback = message.get("feedback")
-            body = message.get("body")
-
-            if feedback is None or body is None:
-                print(f"Feedback or body missing for message_id: {message_id}")
-                continue
-
-            # Step 3: Fine-tune the model using the fetched data
-            inputs = torch.tensor([model2.config.tokenizer.encode(body, truncation=True, max_length=512)])
-            labels = torch.tensor([1 if feedback else 0])
-
-            model2.train()
-            optimizer = torch.optim.AdamW(model2.parameters(), lr=5e-5)
-
-            for epoch in range(1):  # Fine-tune for 1 epoch as an example
-                optimizer.zero_grad()
-                outputs = model2(inputs, labels=labels)
-                loss = outputs.loss
-                loss.backward()
-                optimizer.step()
-
-            print(f"Fine-tuning completed for message_id: {message_id}")
-
-            # Step 4: Update isPending to true
-            update_collection.update_one(
-                {"_id": update["_id"]},
-                {"$set": {"isPending": True}}
-            )
-
-            print(f"isPending updated to true for update with message_id: {message_id}")
-            # Step 5: Update status in todo_collection to 'terminated'
-            todo_list_collection.update_one(
-                {"message_id": message_id},
-                {"$set": {"status": "terminated"}}
-            )
-
-            print(f"Status updated to 'terminated' for todo with message_id: {message_id}")
-
-    except Exception as e:
-        print(f"An error occurred: {e}")
-
-   
 if __name__ == '__main__':
     mark_relavance_and_process()
