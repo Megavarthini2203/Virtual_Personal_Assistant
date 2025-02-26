@@ -1,0 +1,88 @@
+/* General Label Styling */
+Widget > QLabel {
+    font: 24px 'Segoe UI', 'Microsoft YaHei';
+    color: white; /* Consolidated color declaration */
+}
+
+/* Stacked Widget Styling */
+StackedWidget {
+    border: 1px solid rgb(29, 29, 29);
+    border-right: none;
+    border-bottom: none;
+    border-top-left-radius: 10px;
+    background-color: rgb(39, 39, 39);
+}
+
+/* Window Styling */
+Window {
+    background-color: rgb(32, 32, 32);
+}
+
+/* Scroll Widget and Smooth Scroll Area Styling */
+ScrollWidget, SmoothScrollArea {
+    background-color: none;
+    border: none;
+}
+
+/* Remove background for QCheckBox */
+QCheckBox {
+    background: transparent;
+    border: none;
+}
+
+
+/* General QWidget Styling */
+QWidget {
+    background-color: rgb(32, 32, 32);
+    border: none;
+}
+
+/* Custom Title Bar */
+CustomTitleBar {
+    background-color: transparent;
+}
+
+/* Title Label in Custom Title Bar */
+CustomTitleBar > QLabel#titleLabel {
+    background: transparent;
+    font: 13px 'Segoe UI';
+    padding: 0 10px;
+    color: white;
+}
+
+/* Minimize Button Styling */
+MinimizeButton {
+    qproperty-normalColor: white;
+    qproperty-normalBackgroundColor: transparent;
+    qproperty-hoverColor: white;
+    qproperty-hoverBackgroundColor: rgba(255, 255, 255, 26);
+    qproperty-pressedColor: white;
+    qproperty-pressedBackgroundColor: rgba(255, 255, 255, 51);
+}
+
+/* Maximize Button Styling */
+MaximizeButton {
+    qproperty-normalColor: white;
+    qproperty-normalBackgroundColor: transparent;
+    qproperty-hoverColor: white;
+    qproperty-hoverBackgroundColor: rgba(255, 255, 255, 26);
+    qproperty-pressedColor: white;
+    qproperty-pressedBackgroundColor: rgba(255, 255, 255, 51);
+}
+
+/* Close Button Styling */
+CloseButton {
+    qproperty-normalColor: white;
+    qproperty-normalBackgroundColor: transparent;
+    qproperty-hoverColor: white;
+    qproperty-hoverBackgroundColor: rgba(255, 255, 255, 26);
+    qproperty-pressedColor: white;
+    qproperty-pressedBackgroundColor: rgba(255, 255, 255, 51);
+}
+
+/* Remove background for QCheckBox */
+CheckBox, CaptionLabel, QLabel, SubtitleLabel {
+    background: transparent;
+    border: none;
+}
+
