@@ -85,7 +85,7 @@ pip install transformers torch google-generativeai
 
 6. **Download model using the following link **
 
-[MODEL LINK]()
+[MODEL LINK](https://drive.google.com/file/d/1C_lWcFbho55a0MOFGUSq16Qzwiq7AxsH/view?usp=sharing)
 
 Place the `model` and `tokenizer` folder inside the `brain`
 
